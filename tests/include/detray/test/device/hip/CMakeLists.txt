@@ -5,13 +5,19 @@
 # Mozilla Public License Version 2.0
 
 # C++17 support for HIP requires CMake 3.21.
-cmake_minimum_required(VERSION 3.21) # HIP langauge support requires minimum 3.21
+cmake_minimum_required(VERSION 3.21) # HIP langauge support requires minimum 3.21 
+
+find_package(HIPToolkit)
 
 # Enable HIP as a language.
 enable_language(HIP)
 
 # Set the HIP build flags.
 include(detray-compiler-options-hip)
+
+set_source_files_properties(material_validation.hip PROPERTIES LANGUAGE HIP)
+set_source_files_properties(navigation_validation.hip PROPERTIES LANGUAGE HIP)
+
 
 # Set up a test library, which the "new style" benchmarks and tests could use.
 add_library(
